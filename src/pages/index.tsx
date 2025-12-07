@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
@@ -20,8 +19,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            to="/getting-started/introduction">
+            Get Started →
           </Link>
         </div>
       </div>
@@ -29,12 +28,70 @@ function HomepageHeader() {
   );
 }
 
+function HomepageFeatures(): ReactNode {
+  return (
+    <section className={styles.features}>
+      <div className="container">
+        <div className="row">
+          <div className="col col--4">
+            <div className={styles.featureCard}>
+              <h3>🚀 Getting Started</h3>
+              <p>
+                New to Rivia? Start here to learn the fundamentals and get up and running quickly.
+              </p>
+              <Link to="/getting-started/introduction">Learn More →</Link>
+            </div>
+          </div>
+          <div className="col col--4">
+            <div className={styles.featureCard}>
+              <h3>🏗️ Infrastructure as Code</h3>
+              <p>
+                Production-ready Terraform modules for Azure, AWS, and GCP with security best practices built-in.
+              </p>
+              <Link to="/modules/azure-policy">Explore Modules →</Link>
+            </div>
+          </div>
+          <div className="col col--4">
+            <div className={styles.featureCard}>
+              <h3>🔒 Security & Compliance</h3>
+              <p>
+                CIS benchmark compliant modules with automated security scanning and static analysis.
+              </p>
+              <Link to="/guides/security-compliance">Learn More →</Link>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{marginTop: '2rem'}}>
+          <div className="col col--6">
+            <div className={styles.featureCard}>
+              <h3>📚 Documentation</h3>
+              <p>
+                Comprehensive guides, tutorials, and reference documentation for all our modules and tools.
+              </p>
+              <Link to="/getting-started/introduction">Browse Docs →</Link>
+            </div>
+          </div>
+          <div className="col col--6">
+            <div className={styles.featureCard}>
+              <h3>🛠️ DevOps Foundations</h3>
+              <p>
+                Best practices for CI/CD, testing, versioning, and infrastructure management.
+              </p>
+              <Link to="/devops-foundations/ci-cd">Learn More →</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title}`}
+      description="Production-ready Terraform modules and infrastructure documentation for Azure, AWS, and GCP">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

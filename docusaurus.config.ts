@@ -2,34 +2,28 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
-  title: 'Rivia AI Documentation',
-  tagline: 'Terraform modules and infrastructure documentation',
+  title: 'Rivia Documentation',
+  tagline: 'Production-ready Terraform modules and infrastructure documentation',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
-  url: 'https://rivia-ai.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  url: 'https://docs.rivia.io',
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Rivia-AI', // Usually your GitHub org/user name.
-  projectName: 'rivia-docs', // Usually your repo name.
+  organizationName: 'Rivia-AI',
+  projectName: 'rivia-docs',
 
   onBrokenLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -41,10 +35,10 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/Rivia-AI/rivia-docs/tree/main/',
+          routeBasePath: '/',
+          editUrl: 'https://github.com/Rivia-AI/rivia-docs/tree/main/',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         blog: {
           showReadingTime: true,
@@ -52,14 +46,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/Rivia-AI/rivia-docs/tree/main/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          editUrl: 'https://github.com/Rivia-AI/rivia-docs/tree/main/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -69,23 +56,35 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
+      defaultMode: 'light',
     },
     navbar: {
-      title: 'Rivia AI',
+      title: 'Rivia',
       logo: {
-        alt: 'Rivia AI Logo',
+        alt: 'Rivia Logo',
         src: 'img/logo.svg',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'modulesSidebar',
+          position: 'left',
+          label: 'Modules',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'guidesSidebar',
+          position: 'left',
+          label: 'Guides',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
@@ -103,11 +102,19 @@ const config: Config = {
           items: [
             {
               label: 'Getting Started',
-              to: '/docs/intro',
+              to: '/getting-started/introduction',
             },
             {
-              label: 'Terraform Modules',
-              to: '/docs/intro',
+              label: 'Azure Modules',
+              to: '/modules/azure-policy',
+            },
+            {
+              label: 'AWS Modules',
+              to: '/modules/aws',
+            },
+            {
+              label: 'GCP Modules',
+              to: '/modules/gcp',
             },
           ],
         },
@@ -121,6 +128,10 @@ const config: Config = {
             {
               label: 'Terraform Modules',
               href: 'https://github.com/Rivia-AI?q=terraform',
+            },
+            {
+              label: 'CI/CD Documentation',
+              to: '/guides/ci-cd',
             },
           ],
         },
@@ -138,11 +149,12 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Rivia AI. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Rivia. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['bash', 'yaml', 'hcl', 'json'],
     },
   } satisfies Preset.ThemeConfig,
 };
